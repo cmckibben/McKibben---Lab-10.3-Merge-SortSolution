@@ -34,9 +34,9 @@ class Main {
    * @postcondition array in the parameter will be sorted
    */
   public static int[] insertionSort(int[] array) {
-    int j = 0; // number of items sorted so far
-    int i = 0; // starting point of unsorted array
-    int key = 0; // the item to be inserted
+    int j; // number of items sorted so far
+    int i; // starting point of unsorted array
+    int key; // the item to be inserted
     for (j = 1; j < array.length; j++) // start with 1 since the first item is sorted
     {
       key = array[j];// find item to be sorted
@@ -122,12 +122,12 @@ class Main {
     // for timing
     long startTime = 0;
     long endTime = 0;
-    ArrayList<Long> selectionSortRunTimes = new ArrayList<Long>();
-    ArrayList<Long> insertionSortRunTimes = new ArrayList<Long>();
-    ArrayList<Long> mergeSortRunTimes = new ArrayList<Long>();
+    ArrayList<Long> selectionSortRunTimes = new ArrayList<>();
+    ArrayList<Long> insertionSortRunTimes = new ArrayList<>();
+    ArrayList<Long> mergeSortRunTimes = new ArrayList<>();
 
     long counter = 0;
-    int average = 0;
+    int average;
 
     for (int i = 0; i < runs; i++) {
       // copy first, don't want to include copy in the time
