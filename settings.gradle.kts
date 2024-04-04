@@ -1,2 +1,2 @@
-rootProject.name = "MergeSort"
+//rootProject.name = "SampleJava"
 

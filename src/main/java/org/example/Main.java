@@ -52,13 +52,58 @@ class Main {
   }
 
   public static int[] mergeSort(int[] array) {
-    return array;
+    int[] left;
+    int[] right;
 
+    //base case
+    if(array.length == 1) return array;
+
+    //Split the array
+    left = new int[array.length /2];
+    right = new int[array.length - left.length];
+
+    //copy Lower half to left
+    System.arraycopy(array , 0 , left , 0 , left.length);
+
+    //copy Upper half to right
+    System.arraycopy(array , left.length , right , 0 , right.length);
+
+
+    //Sort left and right
+    mergeSort(left);
+    mergeSort(right);
+
+    /*System.out.println("Left:");
+    for(int x : left) System.out.print(x + " ");
+    System.out.println("\nRight:");
+    for(int x : right) System.out.print(x + " ");
+    System.out.println();*/
+
+    //Merge Arrays
+    int l = 0;
+    int r = 0;
+
+    for(int i = 0; i < array.length; i++){
+      if (l >= left.length) {
+        array[i] = right[r];
+        r++;
+      } else if (r >= right.length) {
+        array[i] = left[l];
+        l++;
+      } else if (left[l] < right[r]) {
+        array[i] = left[l];
+        l++;
+      } else {
+        array[i] = right [r];
+        r++;
+      }
+    }
+    return array;
   }
 
   public static void main(String[] args) {
-    final long runs = 1000;
-    //final long runs = 1000000;
+    //final long runs = 1000;
+    final long runs = 1000000;
     int[] temp = { 36, 24, 10, 6, 12 };
     // selectionSort(temp);
     // insertionSort(temp);
@@ -86,15 +131,13 @@ class Main {
 
     for (int i = 0; i < runs; i++) {
       // copy first, don't want to include copy in the time
-      for (int j = 0; j < size; j++)
-        unsortedArray_copy[j] = unsortedArray[j];
+        System.arraycopy(unsortedArray , 0 , unsortedArray_copy , 0 , size);
       startTime = System.nanoTime();
       selectionSort(unsortedArray_copy);
       endTime = System.nanoTime();
       selectionSortRunTimes.add((endTime - startTime));
     }
-    counter = 0;
-    for (Long value : selectionSortRunTimes) {
+      for (Long value : selectionSortRunTimes) {
       counter += value;
     }
     average = (int) (counter / runs);
@@ -102,8 +145,7 @@ class Main {
 
     for (int i = 0; i < runs; i++) {
       // copy first, don't want to include copy in the time
-      for (int j = 0; j < size; j++)
-        unsortedArray_copy[j] = unsortedArray[j];
+        System.arraycopy(unsortedArray , 0 , unsortedArray_copy , 0 , size);
       startTime = System.nanoTime();
       insertionSort(unsortedArray_copy);
       endTime = System.nanoTime();
@@ -118,8 +160,7 @@ class Main {
 
     for (int i = 0; i < runs; i++) {
       // copy first, don't want to include copy in the time
-      for (int j = 0; j < size; j++)
-        unsortedArray_copy[j] = unsortedArray[j];
+        System.arraycopy(unsortedArray , 0 , unsortedArray_copy , 0 , size);
       startTime = System.nanoTime();
       mergeSort(unsortedArray_copy);
       endTime = System.nanoTime();
